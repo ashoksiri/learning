@@ -1,0 +1,154 @@
+{% load static djng_tags sekizai_tags tutorial_tags %}
+<!doctype html>
+<html lang="en" ng-app="djangular-demo">
+<head>
+	<title>{% block form_title %}Mate Finder{% endblock %}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="shortcut icon" href="static/images/icon.png" />
+	{% render_block "css" %}
+</head>
+
+{% addtoblock "css" %}<link href="{% static 'node_modules/bootstrap/dist/css/bootstrap.css' %}" rel="stylesheet" />{% endaddtoblock %}
+{% addtoblock "css" %}<link href="{% static 'djng/css/styles.css' %}" rel="stylesheet" />{% endaddtoblock %}
+{% addtoblock "css" %}<link href="{% static 'djng/css/bootstrap3.css' %}" rel="stylesheet" />{% endaddtoblock %}
+{% addtoblock "css" %}<link href="{% static 'css/djangular-demo.css' %}" rel="stylesheet" />{% endaddtoblock %}
+{% addtoblock "css" %}<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet">{% endaddtoblock %}
+
+
+<body>
+
+<div class="container-fluid" ng-controller="navbar-controller">
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid navbar-border">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">
+            <!--<img src="{% static 'images/icon.png' %}">-->
+          <img src="http://placehold.it/150x50&text=Home" alt="" ng-click="home()">
+      </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#"><i class="fa fa-building"></i> About</a></li>
+        <li><a href="#"><i class="fa fa-phone"></i> Contact</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-anchor"></i> Support <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#"><i class="fa fa-envelope"></i> Email</a></li>
+            <li><a href="#"><i class="fa fa-comments"></i> Chat</a></li>
+            <li><a href="#"><i class="fa fa-phone"></i> Phone Support</a></li>
+            <li class="divider"></li>
+            <li class=""><a href="#"><i class="fa fa-credit-card"></i> Make a Payment</a></li>
+          </ul>
+        </li>
+        <li>
+            <form class="navbar-form" role="search">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="search" name="q">
+                <div class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+            </form>
+        </li>
+        <li><a href="#"><i class="fa fa-twitter color-twitter"></i></a></li>
+        <li><a href="#"><i class="fa fa-facebook color-facebook"></i></a></li>
+        <li><a href="#"><i class="fa fa-linkedin color-linkedin"></i></a></li>
+      </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+       {% if request.user.is_anonymous %}
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cogs"></i> <b class="color-blue">Login</b> <span class="caret"></span></a>
+
+            <ul class="dropdown-menu login-panel">
+              <li>
+                <div class="dropdown-header">
+                    <span class="login-header color-blue">Sign In</span>
+                    <span class="forgot-password color-blue"><a href="">Forgot password?</a></span>
+                </div>
+                <div class="clearfix"></div>
+                <div style="padding: 8px;">
+                    <form id="loginform" class="form-horizontal" role="form"  autocomplete="off" action="login" method="post">
+                        {% csrf_token %}
+                        <div style="margin-bottom: 10px" class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user color-blue"></i></span>
+                            <!-- USERNAME OR EMAIL ADDRESS -->
+                            <input id="login-username" type="email" class="form-control" name="username" value="" placeholder="username or email" required>
+                        </div>
+                        <div style="margin-bottom: 10px" class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock color-blue"></i></span>
+                            <!--  PASSWORD  -->
+                            <input id="login-password" type="password" class="form-control" name="password" placeholder="password" required>
+                        </div>
+                        <div class="center-text">
+                            <label><input id="login-remember" type="checkbox" name="remember" value="1"> Remember me</label>
+                        </div>
+                        {% if form.errors %}
+                        <div class="center-text errortext">
+                            <span class="error-message color-red"><i class="glyphicon glyphicon-warning-sign"></i> Username & password don't match!</span>
+                        </div>
+                        <script type="text/javascript">
+
+                            $('.errortext').fadeOut(5000);
+                        </script>
+                        {% endif %}
+                        <div style="margin-top:10px" class="form-group">
+                            <!-- Button -->
+                            <div class="col-sm-12 controls center-text">
+                              <!--<a id="btn-login" href="#" class="btn btn-block btn-success">Login</a>-->
+                                <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+                              <!--<a id="btn-fblogin" href="#" class="btn btn-primary">Login with Facebook</a>-->
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </li>
+
+            <!--<li class="divider"></li>-->
+          </ul>
+        </li>
+          {% else %}
+               <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-anchor"></i> Profile <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="#"><i class="fa fa-envelope"></i> edit</a></li>
+                    <li class="divider"></li>
+                    <li class=""><a href="/logout"><i class="fa fa-credit-card"></i> Logout</a></li>
+                  </ul>
+                </li>
+              {% endif %}
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+</div>
+
+	{% render_block "js" %}
+
+
+
+	{% block addtoblock %}
+        <script src="{% static 'node_modules/angular/angular.js' %}" type="text/javascript"></script>
+		<!--<script src="{% static 'js/djng-tutorial.js' %}" type="text/javascript"></script>-->
+		<script src="{% static 'node_modules/jquery/dist/jquery.js' %}" type="text/javascript"></script>
+		<script src="{% static 'node_modules/bootstrap/dist/js\bootstrap.min.js' %}" type="text/javascript"></script>
+
+	{% endblock %}
+
+	<script type="text/javascript">
+	var app = angular.module('djangular-demo', [
+		{% render_block "ng-requires" postprocessor "djng.sekizai_processors.module_list" %}
+	]){% render_block "ng-config" postprocessor "djng.sekizai_processors.module_config" %};
+	</script>
+    <script type="text/javascript" src="{% static 'js/controllers/app-controller.js'%}"></script>
+</body>
+</html>

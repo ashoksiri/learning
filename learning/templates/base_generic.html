@@ -1,0 +1,22 @@
+<html>
+    <head>
+
+        {% block header %}
+        <script src="static/admin/js/vendor/jquery/jquery.min.js"></script>
+        {% load bootstrap3 %}
+        {# Load CSS and JavaScript #}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+        {# Display django.contrib.messages as Bootstrap alerts #}
+        {% bootstrap_messages %}
+        {% endblock %}
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+    <body>
+        <!-- header, etc -->
+        {% block content %}
+        {% endblock %}
+        <!-- footer -->
+    <script src="static/node_modules/angular/angular.js" type="text/javascript"/>
+    </body>
+</html>
