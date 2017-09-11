@@ -1,0 +1,134 @@
+[{"header":"Satellite observations",
+"urls":
+	[	{
+		"subheader":"",
+		"url":"http://satellite.imd.gov.in/img/3Dglobe_vis.jpg"
+		},
+		{
+		"subheader":"",
+		"url":"http://satellite.imd.gov.in/img/3Dglobe_wv.jpg"
+		},
+		{
+		"subheader":"",
+		"url":"http://satellite.imd.gov.in/img/3Dasiasec_vis.jpg"
+		},
+		{
+		"subheader":"",
+		"url":"http://satellite.imd.gov.in/img/3Dasiasec_wv.jpg"
+		},
+		{
+		"subheader":"",
+		"url":"http://satellite.imd.gov.in/img/3Dsesec_vis.jpg"
+		},
+		{
+		"subheader":"",
+		"url":"http://satellite.imd.gov.in/img/3Dsesec_wv.jpg"
+	}]
+},
+{"header":"Radar observations",
+"urls" : [{
+		"subheader":"",
+		"url":"http://www.imd.gov.in/section/dwr/img/caz_mpt.gif"
+		},
+		{
+		"subheader":"",
+		"url":"http://www.imd.gov.in/section/dwr/img/caz_vsk.gif"
+		},
+	{
+		"subheader":"",
+		"url":"http://www.imd.gov.in/section/dwr/img/caz_chn.gif"
+		},
+	{
+		"subheader":"",
+		"url":"http://www.imd.gov.in/section/dwr/img/vp2_mpt.gif"
+		},
+	{
+		"subheader":"",
+		"url":"http://www.imd.gov.in/section/dwr/img/vp2_vsk.gif"
+		},
+	{
+		"subheader":"",
+		"url":"http://www.imd.gov.in/section/dwr/img/caz_vsk.gif"
+		}]
+}
+
+,
+{"header":"Numerical weather prediction",
+"urls" : [{
+		"subheader":"Forecasts of 850mb Temperature, Humidity and Winds",
+		"url":"http://www.monsoondata.org/wx2/india4.24hr.png"
+		},
+		{
+		"subheader":"Forecasts of 850mb Temperature, Humidity and Winds",
+		"url":"http://www.monsoondata.org/wx2/india4.48hr.png"
+		},
+		{
+		"subheader":"Forecasts of 850mb Temperature, Humidity and Winds",
+		"url":"http://www.monsoondata.org/wx2/india4.72hr.png"
+		},
+		{
+		"subheader":"Forecasts of Perceptible Water, Cloud Cover, and Convective Available Potential Energy",
+		"url":"http://www.monsoondata.org/wx2/india6.24hr.png"
+		},
+		{
+		"subheader":"Forecasts of Perceptible Water, Cloud Cover, and Convective Available Potential Energy",
+		"url":"http://www.monsoondata.org/wx2/india6.48hr.png"
+		},
+		{
+		"subheader":"Forecasts of Perceptible Water, Cloud Cover, and Convective Available Potential Energy",
+		"url":"http://www.monsoondata.org/wx2/india6.72hr.png"
+		},
+		{
+		"subheader":"Forecasts of Vertical Velocity or Precipitation",
+		"url":"http://www.monsoondata.org/wx2/india3.24hr.png"
+		},
+		{
+		"subheader":"Forecasts of Vertical Velocity or Precipitation",
+		"url":"http://www.monsoondata.org/wx2/india3.48hr.png"
+		},
+		{
+		"subheader":"Forecasts of Vertical Velocity or Precipitation",
+		"url":"http://www.monsoondata.org/wx2/india3.72hr.png"
+		},
+		{
+		"subheader":"IMD Mesoscale model MSL",
+		"url":"http://nwp.imd.gov.in/wrf/WRFd01-MSLP_24.png"
+		},
+		{
+		"subheader":"IMD Mesoscale model MSL",
+		"url":"http://nwp.imd.gov.in/wrf/WRFd01-MSLP_48.png"
+		},
+		{
+		"subheader":"IMD Mesoscale model MSL",
+		"url":"http://nwp.imd.gov.in/wrf/WRFd01-MSLP_72.png"
+		},
+		{
+		"subheader":"IMD Mesoscale model Rainfall",
+		"url":"http://nwp.imd.gov.in/wrf/WRFd01-RAIN_24.png"
+		},
+		{
+		"subheader":"IMD Mesoscale model Rainfall",
+		"url":"http://nwp.imd.gov.in/wrf/WRFd01-RAIN_48.png"
+		},
+		{
+		"subheader":"IMD Mesoscale model Rainfall",
+		"url":"http://nwp.imd.gov.in/wrf/WRFd01-RAIN_72.png"
+		},
+		{
+		"subheader":"GEFS Model rainfall",
+		"url":"http://nwp.imd.gov.in/gefs/avg-rain-24.png"
+		},
+		{
+		"subheader":"GEFS Model rainfall",
+		"url":"http://nwp.imd.gov.in/gefs/avg-rain-48.png"
+		},
+		{
+		"subheader":"GEFS Model rainfall",
+		"url":"http://nwp.imd.gov.in/gefs/avg-rain-72.png"
+		},
+		{
+		"subheader":"APSDPS Observed 24 hrs rainfall",
+		"url":"http://www.apsdps.ap.gov.in/Rainfall/rf1_ap.jpg"
+		}
+	]
+}]
