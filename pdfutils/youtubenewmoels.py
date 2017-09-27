@@ -40,7 +40,7 @@ class TopLevelCommentSnippet(EmbeddedDocument):
     updatedAt = fields.DateTimeField(null=True)
 
 class TopLevelComment(EmbeddedDocument):
-    commentId = fields.StringField()
+    id = fields.StringField()
     snippet = fields.EmbeddedDocumentField(TopLevelCommentSnippet,null=True)
 
 class CommentSnippet(EmbeddedDocument):
@@ -122,13 +122,13 @@ class ChannelSnippet(EmbeddedDocument):
 
 class Channel(EmbeddedDocument):
     channelId = fields.StringField()
-    snippet   = fields.EmbeddedDocumentField(ChannelSnippet)
-    contentDetails = fields.EmbeddedDocumentField(ChannelContentDetails)
-    statistics = fields.EmbeddedDocumentField(ChannelStatistics)
-    topicDetails = fields.EmbeddedDocumentField(TopicDetails)
-    status = fields.EmbeddedDocumentField(ChannelStatus)
-    brandingSettings = fields.EmbeddedDocumentField(BrandingSettings)
-    contentOwnerDetails = fields.EmbeddedDocumentField(ContentOwnerDetails)
+    snippet   = fields.EmbeddedDocumentField(ChannelSnippet,null=True)
+    contentDetails = fields.EmbeddedDocumentField(ChannelContentDetails,null=True)
+    statistics = fields.EmbeddedDocumentField(ChannelStatistics,null=True)
+    topicDetails = fields.EmbeddedDocumentField(TopicDetails,null=True)
+    status = fields.EmbeddedDocumentField(ChannelStatus,null=True)
+    brandingSettings = fields.EmbeddedDocumentField(BrandingSettings,null=True)
+    contentOwnerDetails = fields.EmbeddedDocumentField(ContentOwnerDetails,null=True)
 
 
 class VideoLiveStreamingDetails(EmbeddedDocument):
@@ -153,7 +153,7 @@ class VideoStatus(EmbeddedDocument):
     privacyStatus       = fields.StringField(null=True)
     publishAt           = fields.DateTimeField(null=True)
     license             = fields.StringField(null=True)
-    embeddable          = fields.DateTimeField(null=True)
+    embeddable          = fields.BooleanField(null=True)
     publicStatsViewable = fields.BooleanField(null=True)
 
 class RegionRestriction(EmbeddedDocument):
@@ -169,7 +169,7 @@ class VideoContentDetails(EmbeddedDocument):
     dimention           = fields.StringField(null=True)
     definition          = fields.StringField(null=True)
     caption             = fields.StringField(null=True)
-    licensedContent     = fields.StringField(null=True)
+    licensedContent     = fields.BooleanField(null=True)
     regionRestriction   = fields.EmbeddedDocumentField(RegionRestriction,null=True)
     contentRating       = fields.EmbeddedDocumentField(ContentRating,null=True)
     projection          = fields.StringField(null=True)
@@ -183,7 +183,7 @@ class VideoSnippeet(EmbeddedDocument):
     descriptionParsed    = fields.StringField(null=True)
     thumbnails           = fields.EmbeddedDocumentField(Thumbnail,null=True)
     channelTitle         = fields.StringField(null=True)
-    tags                 = fields.LineStringField(null=True)
+    tags                 = fields.ListField(null=True)
     categoryId           = fields.StringField(null=True)
     liveBroadCastContent = fields.StringField(null=True)
     defaultLanguage      = fields.StringField(null=True)
@@ -192,12 +192,14 @@ class VideoSnippeet(EmbeddedDocument):
 
 class Video(Document):
     videoId                 = fields.StringField()
+    channelId               = fields.StringField()
+    title                   = fields.StringField()
     snippet                 = fields.EmbeddedDocumentField(VideoSnippeet)
     contentDetails          = fields.EmbeddedDocumentField(VideoContentDetails)
     status                  = fields.EmbeddedDocumentField(VideoStatus)
     statistics              = fields.EmbeddedDocumentField(VideoStatistics)
     topicDetails            = fields.EmbeddedDocumentField(TopicDetails,null=True)
-    liveStreamingDetails    = fields.EmbeddedDocumentField(VideoLiveStreamingDetails,null=True)
+    liveStreamingDetails    = fields.EmbeddedDocumentField(VideoLiveStreamingDetails,null=True,default={})
     polarity                = fields.EmbeddedDocumentField(Polarity)
     channel                 = fields.EmbeddedDocumentField(Channel)
     comments                = fields.EmbeddedDocumentListField(Comment)
