@@ -8,6 +8,10 @@ class Polarity(EmbeddedDocument):
     key     = fields.StringField(null=True)
     value   = fields.FloatField(null=True)
 
+
+    def __dict__(self):
+        return {'key':self.key,'value':self.value}
+
 class DefaultThumbnail(EmbeddedDocument):
     url     = fields.StringField(null=True)
     width   = fields.IntField(null=True)
@@ -39,9 +43,33 @@ class TopLevelCommentSnippet(EmbeddedDocument):
     publishedAt = fields.DateTimeField(null=True)
     updatedAt = fields.DateTimeField(null=True)
 
+    def __dict__(self):
+        return {
+    'authorDisplayName' :self.authorDisplayName,
+    'authorProfileImageUrl': self.authorProfileImageUrl,
+    'authorChannelUrl':self.authorChannelUrl,
+    'authorChannelId' :self.authorChannelId,
+    'channelId':self.channelId,
+    'videoId':self.videoId,
+    'textDisplay':self.textDisplay,
+    'textOriginal':self.textOriginal,
+    'textOriginalParsed':self.textOriginalParsed,
+    'parentId':self.parentId,
+    'canRate' :self.canRate,
+    'viewerRating':self.viewerRating,
+    'likeCount' :self.likeCount,
+    'moderationStatus':self.moderationStatus,
+    'publishedAt' :self.publishedAt,
+    'updatedAt' :self.updatedAt
+        }
+
 class TopLevelComment(EmbeddedDocument):
     id = fields.StringField()
     snippet = fields.EmbeddedDocumentField(TopLevelCommentSnippet,null=True)
+
+    def __dict__(self):
+        return {'id':self.id,
+                'snippet':self.snippet.__dict__()}
 
 class CommentSnippet(EmbeddedDocument):
     channelId= fields.StringField()
@@ -51,10 +79,21 @@ class CommentSnippet(EmbeddedDocument):
     totalReplyCount = fields.LongField(null=True)
     isPublic = fields.BooleanField(null=True)
 
+    def __dict__(self):
+        return {'channelId':self.channelId,
+                'videoId':self.videoId,
+                'topLevelComment':self.topLevelComment.__dict__(),
+                'canReply':self.canReply,
+                'totalReplyCount':self.totalReplyCount,
+                'isPublic':self.isPublic}
+
 class CommentReplay(EmbeddedDocument):
     id = fields.StringField(null=True)
     snippet = fields.EmbeddedDocumentField(CommentSnippet,null=True)
 
+    def __dict__(self):
+        return {'id':self.id,
+                'snippet':self.snippet.__dict__()}
 
 class Replies(EmbeddedDocument):
     comments = fields.EmbeddedDocumentListField(CommentReplay,null=True)
@@ -62,8 +101,14 @@ class Replies(EmbeddedDocument):
 class Comment(EmbeddedDocument):
     commentId = fields.StringField()
     snippet = fields.EmbeddedDocumentField(CommentSnippet)
-    replies = fields.EmbeddedDocumentField(CommentReplay,null=True)
+    #replies = fields.EmbeddedDocumentField(CommentReplay,null=True)
     polarity = fields.EmbeddedDocumentField(Polarity)
+
+    def __dict__(self):
+        return {'commentId':self.commentId,
+                'snippet':self.snippet.__dict__(),
+                #'replies':self.replies.__dict__(),
+                'polarity':self.polarity.__dict__()}
 
 class ContentOwnerDetails(EmbeddedDocument):
     contentOwner = fields.StringField(null=True)
@@ -112,7 +157,7 @@ class ChannelStatistics(EmbeddedDocument):
 
 class ChannelSnippet(EmbeddedDocument):
     title= fields.StringField()
-    description= fields.StringField()
+    description= fields.StringField(null=True)
     customUrl= fields.StringField(null=True)
     publishedAt = fields.DateTimeField()
     thumbnails = fields.EmbeddedDocumentField(Thumbnail,null=True)
@@ -185,7 +230,7 @@ class VideoSnippeet(EmbeddedDocument):
     channelTitle         = fields.StringField(null=True)
     tags                 = fields.ListField(null=True)
     categoryId           = fields.StringField(null=True)
-    liveBroadCastContent = fields.StringField(null=True)
+    liveBroadcastContent = fields.StringField(null=True)
     defaultLanguage      = fields.StringField(null=True)
     localized            = fields.EmbeddedDocumentField(Localized,null=True)
     defaultAudioLanguage = fields.StringField(null=True)
